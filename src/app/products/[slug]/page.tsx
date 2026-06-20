@@ -5,17 +5,17 @@ import ProductCard from '@/components/ui/product-card'
 import ProductDetailClient from './product-detail-client'
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }))
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const product = getProductBySlug(params.slug)
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const product = getProductBySlug(slug)
   if (!product) return { title: 'Product Not Found' }
-
   return {
     title: product.name,
     description: product.description,
@@ -26,16 +26,14 @@ export function generateMetadata({ params }: PageProps): Metadata {
   }
 }
 
-export default function ProductDetailPage({ params }: PageProps) {
-  const product = getProductBySlug(params.slug)
+export default async function ProductDetailPage({ params }: PageProps) {
+  const { slug } = await params
+  const product = getProductBySlug(slug)
   if (!product) notFound()
-
   const related = getRelatedProducts(product)
-
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <ProductDetailClient product={product} />
-
       {related.length > 0 && (
         <section className="mt-14">
           <h2 className="mb-5 font-display text-xl font-extrabold text-dark">
