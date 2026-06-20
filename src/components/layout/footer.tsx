@@ -1,86 +1,57 @@
 import Link from 'next/link'
-import { Droplet, Phone, Mail } from 'lucide-react'
-import { whatsappLink } from '@/lib/utils'
-
-const footerColumns = [
-  {
-    title: 'Products',
-    links: [
-      { href: '/products', label: '19L Water Can' },
-      { href: '/products', label: '1.5L Bottles' },
-      { href: '/products', label: '1L Bottles' },
-      { href: '/products', label: '500ml Bottles' },
-      { href: '/products', label: 'Office Packages' },
-    ],
-  },
-  {
-    title: 'Company',
-    links: [
-      { href: '/#about', label: 'About Us' },
-      { href: '/#why', label: 'Water Quality' },
-      { href: '/#why', label: 'Certifications' },
-      { href: '/contact', label: 'Careers' },
-    ],
-  },
-  {
-    title: 'Support',
-    links: [
-      { href: '/track', label: 'Track Order' },
-      { href: '/contact', label: 'Contact Us' },
-      { href: whatsappLink(), label: 'WhatsApp' },
-      { href: '/#faq', label: 'FAQ' },
-    ],
-  },
-]
+import { Facebook, Instagram, Twitter } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-white">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
-          <div>
-            <div className="mb-2 flex items-center gap-2 font-display text-lg font-extrabold text-primary-400">
-              <Droplet className="h-5 w-5" aria-hidden="true" />
-              Chashma Water
-            </div>
-            <p className="text-sm leading-relaxed text-white/50">
-              Pure, safe drinking water delivered fresh to your doorstep
-              across Lahore.
-            </p>
-            <div className="mt-3 space-y-1 text-sm text-white/50">
-              <p className="flex items-center gap-2">
-                <Phone className="h-3.5 w-3.5" aria-hidden="true" /> 0300-1234567
-              </p>
-              <p className="flex items-center gap-2">
-                <Mail className="h-3.5 w-3.5" aria-hidden="true" /> info@chashmawater.pk
-              </p>
-            </div>
-          </div>
-
-          {footerColumns.map((col) => (
-            <div key={col.title}>
-              <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-white/60">
-                {col.title}
-              </h3>
-              <ul className="space-y-2">
-                {col.links.map((link, idx) => (
-                  <li key={`${col.title}-${idx}`}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-white/50 transition-colors hover:text-primary-400"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+    <footer className="bg-dark px-4 py-12 text-white sm:px-6">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-8">
+          <p className="font-display text-xl font-extrabold">💧 Chashma Water</p>
+          <p className="mt-2 max-w-md text-sm text-white/60">
+            Reliable bulk water supply for distributors, shops, and businesses across Lahore.
+          </p>
         </div>
 
-        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/30">
-          © {new Date().getFullYear()} Chashma Water. All rights reserved. |
-          Lahore, Pakistan
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-white/40">
+              Company
+            </p>
+            <ul className="space-y-2 text-sm text-white/70">
+              <li><Link href="/about" className="hover:text-white">About Us</Link></li>
+              <li><Link href="/products" className="hover:text-white">Products</Link></li>
+              <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-white/40">
+              Support
+            </p>
+            <ul className="space-y-2 text-sm text-white/70">
+              <li><Link href="/track" className="hover:text-white">Track Order</Link></li>
+              <li><Link href="/contact" className="hover:text-white">FAQs</Link></li>
+            </ul>
+          </div>
+          <div className="col-span-2">
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-white/40">
+              Follow Us
+            </p>
+            <div className="flex gap-3">
+              <a href="#" aria-label="Facebook" className="rounded-full bg-white/10 p-2 hover:bg-white/20">
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a href="#" aria-label="Instagram" className="rounded-full bg-white/10 p-2 hover:bg-white/20">
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a href="#" aria-label="Twitter" className="rounded-full bg-white/10 p-2 hover:bg-white/20">
+                <Twitter className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 border-t border-white/10 pt-6 text-xs text-white/40">
+          © {new Date().getFullYear()} Chashma Water. All rights reserved.
         </div>
       </div>
     </footer>

@@ -1,105 +1,100 @@
 'use client'
-
-import Link from 'next/link'
 import { useState } from 'react'
-import { Droplet, ShoppingCart, Menu, X } from 'lucide-react'
-import { useCart } from '@/lib/cart-context'
-import { cn } from '@/lib/utils'
+import Link from 'next/link'
+import { Menu, X, ChevronDown } from 'lucide-react'
 
-const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/products', label: 'Products' },
-  { href: '/track', label: 'Track Order' },
-  { href: '/contact', label: 'Contact' },
+const navItems = [
+  { label: 'Home', href: '/' },
+  {
+    label: 'About Us',
+    href: '/about',
+    dropdown: [
+      { label: 'Our Story', href: '/about' },
+      { label: 'Quality & Safety', href: '/about#quality' },
+    ],
+  },
+  { label: 'Products', href: '/products' },
+  { label: 'Track Order', href: '/track' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export default function Navbar() {
-  const { itemCount } = useCart()
   const [open, setOpen] = useState(false)
+  const [dropOpen, setDropOpen] = useState<string | null>(null)
 
   return (
-    <header className="sticky top-0 z-50 bg-dark">
-      <nav
-        className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6"
-        aria-label="Main navigation"
-      >
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-display text-lg font-extrabold text-white"
-        >
-          <Droplet className="h-5 w-5 text-primary-400" aria-hidden="true" />
-          Chashma Water
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+        <Link href="/" className="font-display text-xl font-extrabold text-primary-600">
+          💧 Chashma Water
         </Link>
 
-        <ul className="hidden items-center gap-6 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
+        <nav className="hidden items-center gap-1 lg:flex">
+          {navItems.map((item) => (
+            <div
+              key={item.label}
+              className="relative"
+              onMouseEnter={() => item.dropdown && setDropOpen(item.label)}
+              onMouseLeave={() => item.dropdown && setDropOpen(null)}
+            >
               <Link
-                href={link.href}
-                className="text-sm text-white/75 transition-colors hover:text-primary-400"
+                href={item.href}
+                className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold text-dark transition-colors hover:bg-slate-50 hover:text-primary-600"
               >
-                {link.label}
+                {item.label}
+                {item.dropdown && <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />}
               </Link>
-            </li>
+              {item.dropdown && dropOpen === item.label && (
+                <div className="absolute left-0 top-full w-48 rounded-xl border border-slate-200 bg-white py-2 shadow-lg">
+                  {item.dropdown.map((sub) => (
+                    <Link
+                      key={sub.label}
+                      href={sub.href}
+                      className="block px-4 py-2 text-sm text-dark hover:bg-slate-50 hover:text-primary-600"
+                    >
+                      {sub.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
-        </ul>
+        </nav>
 
-        <div className="flex items-center gap-2">
-          <Link
-            href="/admin"
-            className="hidden rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-white/20 sm:block"
-          >
-            Admin Panel
-          </Link>
-          <Link
-            href="/cart"
-            className="flex items-center gap-1.5 rounded-full bg-primary-600 px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-primary-700"
-            aria-label={`Cart, ${itemCount} items`}
-          >
-            <ShoppingCart className="h-4 w-4" aria-hidden="true" />
-            <span className="hidden sm:inline">Cart</span>
-            <span className="flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-cyan-400 px-1 text-[11px] font-bold text-dark">
-              {itemCount}
-            </span>
-          </Link>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            className="rounded-md p-2 text-white md:hidden"
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            aria-expanded={open}
-          >
-            {open ? (
-              <X className="h-5 w-5" aria-hidden="true" />
-            ) : (
-              <Menu className="h-5 w-5" aria-hidden="true" />
-            )}
-          </button>
-        </div>
-      </nav>
-
-      <div
-        className={cn(
-          'overflow-hidden border-t border-white/10 transition-all md:hidden',
-          open ? 'max-h-64' : 'max-h-0 border-t-0'
-        )}
-      >
-        <ul className="flex flex-col gap-1 px-4 py-3">
-          {[...navLinks, { href: '/admin', label: 'Admin Panel' }].map(
-            (link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-md px-3 py-2 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            )
-          )}
-        </ul>
+        <button
+          onClick={() => setOpen(!open)}
+          className="rounded-lg p-2 hover:bg-slate-50 lg:hidden"
+          aria-label="Toggle menu"
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
+
+      {open && (
+        <nav className="border-t border-slate-200 bg-white px-4 py-3 lg:hidden">
+          {navItems.map((item) => (
+            <div key={item.label}>
+              <Link
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="block rounded-lg px-3 py-2 text-sm font-semibold text-dark hover:bg-slate-50"
+              >
+                {item.label}
+              </Link>
+              {item.dropdown?.map((sub) => (
+                <Link
+                  key={sub.label}
+                  href={sub.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-lg px-6 py-1.5 text-xs text-slate-500 hover:bg-slate-50"
+                >
+                  {sub.label}
+                </Link>
+              ))}
+            </div>
+          ))}
+        </nav>
+      )}
     </header>
   )
 }
