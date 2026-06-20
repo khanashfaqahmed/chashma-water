@@ -26,13 +26,13 @@ export default function Hero() {
         className="animate-float absolute left-[5%] top-[22%] hidden items-center gap-1.5 rounded-2xl bg-white px-4 py-2 text-sm font-medium text-dark shadow-xl sm:flex"
         aria-hidden="true"
       >
-        🌟 Lab tested daily
+        Lab tested daily
       </div>
       <div
         className="animate-float-delayed absolute right-[5%] top-[32%] hidden items-center gap-1.5 rounded-2xl bg-white px-4 py-2 text-sm font-medium text-dark shadow-xl sm:flex"
         aria-hidden="true"
       >
-        🚚 Bulk delivery available
+        Bulk delivery available
       </div>
 
       <div className="relative mx-auto max-w-2xl">
@@ -57,8 +57,8 @@ export default function Hero() {
           <Link href="/products">
             <Button size="lg">Order Now</Button>
           </Link>
-          
-            href={whatsappLink("Hi! I'd like to inquire about wholesale water supply from Chashma Water.")}
+          <a
+            href={whatsappLink("Hi! I would like to inquire about wholesale water supply from Chashma Water.")}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -87,4 +87,3 @@ export default function Hero() {
     </section>
   )
 }
-EOF
