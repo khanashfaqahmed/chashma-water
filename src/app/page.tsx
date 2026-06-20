@@ -1,7 +1,6 @@
 import Hero from '@/components/sections/hero'
 import WhyChooseUs from '@/components/sections/why-choose-us'
 import HowItWorks from '@/components/sections/how-it-works'
-import SubscriptionPlans from '@/components/sections/subscription-plans'
 import AreaChecker from '@/components/sections/area-checker'
 import Testimonials from '@/components/sections/testimonials'
 import Faq from '@/components/sections/faq'
@@ -13,7 +12,6 @@ export default function HomePage() {
       <Hero />
       <WhyChooseUs />
       <HowItWorks />
-      <SubscriptionPlans />
       <AreaChecker />
       <Testimonials />
       <Faq />

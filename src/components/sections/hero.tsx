@@ -4,8 +4,8 @@ import Button from '@/components/ui/button'
 import { whatsappLink } from '@/lib/utils'
 
 const stats = [
-  { value: '10K+', label: 'Happy Customers' },
-  { value: '500+', label: 'Daily Deliveries' },
+  { value: '200+', label: 'Wholesale Partners' },
+  { value: '50K+', label: 'Bottles Supplied Monthly' },
   { value: '15+', label: 'Areas Covered' },
   { value: '99.9%', label: 'Purity Rate' },
 ]
@@ -32,7 +32,7 @@ export default function Hero() {
         className="animate-float-delayed absolute right-[5%] top-[32%] hidden items-center gap-1.5 rounded-2xl bg-white px-4 py-2 text-sm font-medium text-dark shadow-xl sm:flex"
         aria-hidden="true"
       >
-        🚚 Same-day delivery
+        🚚 Bulk delivery available
       </div>
 
       <div className="relative mx-auto max-w-2xl">
@@ -42,22 +42,23 @@ export default function Hero() {
         </span>
 
         <h1 className="font-display text-4xl font-extrabold leading-[1.15] text-white sm:text-5xl">
-          Pure water,
+          Bulk water supply,
           <br />
-          <span className="text-primary-400">delivered fresh</span>
+          <span className="text-primary-400">trusted by wholesalers</span>
         </h1>
 
         <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-white/65">
-          Safe, purified drinking water delivered to your home, office,
-          school or restaurant. Same-day delivery available across Lahore.
+          Reliable, large-volume purified water supply for distributors, shops,
+          and businesses. Competitive wholesale pricing with same-day delivery
+          across Lahore.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link href="/products">
             <Button size="lg">Order Now</Button>
           </Link>
-          <a
-            href={whatsappLink("Hi! I'd like to order water from Chashma Water.")}
+          
+            href={whatsappLink("Hi! I'd like to inquire about wholesale water supply from Chashma Water.")}
             target="_blank"
             rel="noopener noreferrer"
           >
