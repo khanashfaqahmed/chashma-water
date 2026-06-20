@@ -87,3 +87,4 @@ export default function Hero() {
     </section>
   )
 }
+EOF
